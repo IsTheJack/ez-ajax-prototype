@@ -13,10 +13,8 @@ const ezAjax = (...args) => {
 
   // Geting data
   if (Object.prototype.toString.call(args[0]) === '[object Object]') {
-    console.log('ENTROU NO OBJETO');
     var {method, uri, headers, data} = args[0];
   } else {
-    console.log('ENTROU NA ARRAY');
     console.log(args);
     var [method, uri, data] = args;
   }
@@ -34,8 +32,6 @@ const ezAjax = (...args) => {
         if(ajax.status >= 200 && ajax.status <= 300) {
           const responseText = String(ajax.responseText);
           const wantJson = !!headers.Accept.match(/json/i);
-          console.log(headers.Accept);
-          console.log("Quer json? " + wantJson);
           resolve(wantJson ? JSON.parse(responseText) : responseText);
         } else {
           reject(ajax.status);
